@@ -19,7 +19,6 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.2.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.2.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.2.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.9" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.19" />
@@ -41,6 +40,12 @@
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.39" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:3.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:3.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:3.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:3.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:3.2.5.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">
