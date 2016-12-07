@@ -30,6 +30,8 @@
 
     <!-- 表示JPA Repository所在的包 -->
     <jpa:repositories base-package="edu.sjsu.cmpe275.library.repository"/>
+    <mvc:resources location="/resources/" mapping="/static/**"></mvc:resources>
+
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="defaultPersistenceUnit"/>

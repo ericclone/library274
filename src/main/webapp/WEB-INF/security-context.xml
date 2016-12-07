@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+       xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
@@ -16,8 +16,8 @@
     <security:authentication-manager>
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
-                                        authorities-by-username-query="select * from authorities where binary username=?"
-                                        users-by-username-query="select EMAIL, PASSWORD, ENABLED from users where binary username=?" />
+                                        authorities-by-username-query="select EMAIL, AUTHORITY from user where binary email=?"
+                                        users-by-username-query="select EMAIL, PASSWORD, ENABLED from user where binary email=?" />
         </security:authentication-provider>
     </security:authentication-manager>
 
@@ -37,10 +37,14 @@
         <security:intercept-url pattern="/createoffer" access="isAuthenticated()" />
         <security:intercept-url pattern="/docreate" access="isAuthenticated()" />
         <security:intercept-url pattern="/offercreated" access="isAuthenticated()" />
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/createbook" access="hasRole('ROLE_ADMIN')" />
         <security:intercept-url pattern="/**" access="denyAll" />
         <security:form-login login-page="/login"
                              authentication-failure-url="/login?error=true" />
-        <security:logout logout-success-url="/loggedout" />
+        <!--<security:form-login />-->
+        <security:logout logout-success-url="/"/>
+        <!--<security:logout logout-success-url="/loggedout" />-->
     </security:http>
     <!-- security:global-method-security secured-annotations="enabled" / -->
     <security:global-method-security pre-post-annotations="enabled" />
