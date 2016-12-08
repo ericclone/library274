@@ -13,51 +13,51 @@
    <table>
     <tr>
         <td>Book ID</td>
-        <td>${id}</td>
+        <td>${book.id}</td>
     </tr>
     <tr>
         <td>ISBN</td>
-        <td>${isbn}</td>
+        <td>${book.isbn}</td>
     </tr>
     <tr>
         <td>Author</td>
-        <td>${author}</td>
+        <td>${book.author}</td>
     </tr>
     <tr>
         <td>Title</td>
-        <td>${title}</td>
+        <td>${book.title}</td>
     </tr>
     <tr>
         <td>Call Number</td>
-        <td>${callnumber}</td>
+        <td>${book.callNumber}</td>
     </tr>
     <tr>
         <td>Publisher</td>
-        <td>${publisher}</td>
+        <td>${book.publisher}</td>
     </tr>
     <tr>
         <td>Year of Publication</td>
-        <td>${year}</td>
+        <td>${book.year}</td>
     </tr>
     <tr>
         <td>Location in Library</td>
-        <td>${location}</td>
+        <td>${book.location}</td>
     </tr>
     <tr>
         <td>Number of Copies</td>
-        <td>${numberofcopies}</td>
+        <td>${book.numberOfCopies}</td>
     </tr>
     <tr>
         <td>Current Status</td>
-        <td>${status}</td>
+        <td>${book.status}</td>
     </tr>
     <tr>
         <td>Keywords</td>
-        <td>${keywords}</td>
+        <td>${book.keywords}</td>
     </tr>
     <tr>
         <td>Cover Image URL</td>
-        <td>${coverurl}</td>
+        <td>${book.coverUrl}</td>
     </tr>
 </table>  
 </body>

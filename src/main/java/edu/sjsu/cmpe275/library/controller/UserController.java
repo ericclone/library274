@@ -16,7 +16,7 @@ import java.util.List;
  * Created by dzkan on 2016/3/8.
  */
 @Controller
-public class MainController {
+public class UserController {
 
     // 自动装配数据库接口，不需要再写原始的Connection来操作数据库
     @Autowired

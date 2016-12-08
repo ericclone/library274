@@ -1,14 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>SpringMVC Demo 首页</title>
 
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <title>Fictional Library</title>
+
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -19,14 +20,21 @@
     <![endif]-->
 </head>
 <body>
-<h1>这里是SpringMVC Demo首页</h1>
+<h1>You have found the secret entrance to the fictional library</h1>
 
-<h3>出现此页面，说明配置成功。</h3>
+<h3>This place that does not exist</h3>
+<h3><a href="/login">Or does it?</a></h3>
+<h3><a href="/register">Find out yourself.</a></h3>
 
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<sec:authorize access="isAuthenticated()">
+<form name="f" action='<c:url value="/logout" />' method="POST">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input name="submit" type="submit" value="Logout" />
+</form>
+</sec:authorize>
+
 </body>
 </html>

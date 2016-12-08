@@ -11,7 +11,7 @@
 <body>
 
 <h2>Book Information</h2>
-<form:form method="POST" action="createbook">
+<form:form method="POST">
    <table>
     <tr>
         <td><form:label path="isbn">ISBN</form:label></td>
