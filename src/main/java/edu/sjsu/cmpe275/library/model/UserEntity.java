@@ -7,16 +7,24 @@ import java.util.Collection;
  * Created by dzkan on 2016/3/8.
  */
 @Entity
-@Table(name = "user", schema = "springdemo", catalog = "")
+@Table(name = "user", schema = "library", catalog = "")
 public class UserEntity {
     private int id;
+    private String email;
     private String nickname;
     private String password;
     private String firstName;
     private String lastName;
+    private String univId;
+    private String authority;
+    private String verificationToken;
+    private boolean enabled = false;
     private Collection<BlogEntity> blogsById;
 
+
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -27,7 +35,17 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "nickname", nullable = false, length = 45)
+    @Column(name = "email", nullable = false, length = 45)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Basic
+    @Column(name = "nickname", nullable = true, length = 45)
     public String getNickname() {
         return nickname;
     }
@@ -66,6 +84,46 @@ public class UserEntity {
         this.lastName = lastName;
     }
 
+    @Basic
+    @Column(name = "univid", nullable = false, length = 9)
+    public String getUnivId() {
+        return univId;
+    }
+
+    public void setUnivId(String univId) {
+        this.univId = univId;
+    }
+
+    @Basic
+    @Column(name="authority", nullable = false)
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+    @Basic
+    @Column(name = "token", nullable = false)
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    @Basic
+    @Column(name = "enabled", nullable = false)
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,9 +140,11 @@ public class UserEntity {
         return true;
     }
 
+
     @Override
     public int hashCode() {
         int result = id;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);

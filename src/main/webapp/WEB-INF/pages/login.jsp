@@ -45,7 +45,7 @@
     </table>
 </form>
 
-<p><a href="<c:url value="/register" />">Register for a new account</a></p>
+<p><a href="<c:url value="/register" />">Register new account</a></p>
 </body>
 
 </html>

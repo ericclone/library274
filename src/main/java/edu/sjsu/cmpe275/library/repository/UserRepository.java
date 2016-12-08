@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 /**
  * Created by dzkan on 2016/3/8.
  */
@@ -19,6 +21,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     // 定义查询
     // @Param注解用于提取参数
     @Query("update UserEntity us set us.nickname=:qNickname, us.firstName=:qFirstName, us.lastName=:qLastName, us.password=:qPassword where us.id=:qId")
-    public void updateUser(@Param("qNickname") String nickname, @Param("qFirstName") String firstName,
+    void updateUser(@Param("qNickname") String nickname, @Param("qFirstName") String firstName,
                            @Param("qLastName") String qLastName, @Param("qPassword") String password, @Param("qId") Integer id);
+
+    UserEntity findByEmail(String email);
+    Collection<UserEntity> findAllByUnivId(String univId);
+    UserEntity findByVerificationToken(String token);
 }

@@ -20,9 +20,11 @@
     <![endif]-->
 </head>
 <body>
-<h1>You have reached the fictional library</h1>
+<h1>You have found the secret entrance to the fictional library</h1>
 
-<h3>This place does not actually exist</h3>
+<h3>This place that does not exist</h3>
+<h3><a href="/login">Or does it?</a></h3>
+<h3><a href="/register">Find out yourself.</a></h3>
 
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
