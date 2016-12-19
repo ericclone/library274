@@ -11,24 +11,18 @@
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--指明 controller 所在包，并扫描其中的注解-->
     <context:component-scan base-package="edu.sjsu.cmpe275.library.controller, edu.sjsu.cmpe275.library.event"/>
 
-    <!-- 静态资源(js、image等)的访问 -->
     <mvc:default-servlet-handler/>
 
-    <!-- 开启注解 -->
     <mvc:annotation-driven/>
 
-    <!--ViewResolver 视图解析器-->
-    <!--用于支持Servlet、JSP视图解析-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 表示JPA Repository所在的包 -->
     <jpa:repositories base-package="edu.sjsu.cmpe275.library.repository"/>
     <mvc:resources location="/resources/" mapping="/static/**"></mvc:resources>
 
@@ -42,10 +36,11 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/library?useSSL=false</prop>
+                <!--<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/library?useSSL=false</prop>-->
+                <prop key="hibernate.connection.url">jdbc:mysql://aacx75ifadh50i.c0hrznkaxb2t.us-west-1.rds.amazonaws.com:3306/library?useSSL=false</prop>
                 <prop key="hibernate.connection.username">root</prop>
-                <prop key="hibernate.connection.password">123456</prop>
-                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.connection.password">12345678</prop>
+                <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.connection.useUnicode">true</prop>
                 <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
                 <prop key="hibernate.format_sql">true</prop>
@@ -69,7 +64,6 @@
         </property>
     </bean>
 
-    <!-- 事务管理 -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
@@ -89,6 +83,5 @@
         </property>
     </bean>
 
-    <!-- 开启事务管理注解 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

@@ -15,6 +15,8 @@ import java.util.Date;
  */
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
+    BookEntity findById(Long id);
+
     @Modifying
     @Transactional
     @Query("update BookEntity book set book.isbn=:qisbn, book.author=:qauthor, book.title=:qtitle, book.callNumber=:qcallNumber, book.publisher=:qpublisher, book.year=:qyear, book.location=:qlocation, book.numberOfCopies=:qnumberOfCopies, book.status=:qstatus, book.keywords=:qkeywords, book.coverUrl=:qcoverUrl")

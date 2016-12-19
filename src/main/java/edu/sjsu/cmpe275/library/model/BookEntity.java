@@ -1,45 +1,48 @@
 package edu.sjsu.cmpe275.library.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-@Table(name = "BOOK")
+@Table(name = "book")
 public class BookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
     
-    @Column(name="ISBN")
+    @Column(name="isbn")
     private String isbn;
-    @Column(name = "AUTHOR")
+    @Column(name = "author")
     private String author;
-    @Column(name = "TITLE")
+    @Column(name = "title")
     private String title;
-    @Column(name = "CALLNO")
+    @Column(name = "call_no")
     private String callNumber;
-    @Column(name = "PUBLISHER")
+    @Column(name = "publisher")
     private String publisher;
-    @Column(name = "YEAR")
+    @Column(name = "year")
     private String year;
-    @Column(name = "LOCATION")
+    @Column(name = "location")
     private String location;
-    @Column(name = "NUMBER")
+    @Column(name = "number")
     private String numberOfCopies;
-    @Column(name = "STATUS")
+    @Column(name = "status")
     private String status;
-    @Column(name = "KEYWORDS")
+    @Column(name = "keywords")
     private String keywords;
-    @Column(name = "COVER")
+    @Column(name = "cover")
     private String coverUrl;
-
+    @ManyToOne()
+    @JoinColumn(name = "cretate_user_id", referencedColumnName = "id", nullable = false)
+    private UserEntity createdBy;
+    @ManyToOne()
+    @JoinColumn(name = "update_user_id", referencedColumnName = "id", nullable = false)
+    private UserEntity updatedBy;
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    private Collection<CheckOutEntity> checkOut;
 
     // Getters and setters
     public Long getId() {
@@ -114,5 +117,58 @@ public class BookEntity {
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
     }
-    
+
+    public edu.sjsu.cmpe275.library.model.UserEntity getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(edu.sjsu.cmpe275.library.model.UserEntity createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public edu.sjsu.cmpe275.library.model.UserEntity getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(edu.sjsu.cmpe275.library.model.UserEntity updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Collection<CheckOutEntity> getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(Collection<CheckOutEntity> checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BookEntity that = (BookEntity) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (isbn != null ? !isbn.equals(that.isbn) : that.isbn != null) return false;
+        if (author != null ? !author.equals(that.author) : that.author != null) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (callNumber != null ? !callNumber.equals(that.callNumber) : that.callNumber != null) return false;
+        if (publisher != null ? !publisher.equals(that.publisher) : that.publisher != null) return false;
+        if (year != null ? !year.equals(that.year) : that.year != null) return false;
+        return location != null ? location.equals(that.location) : that.location == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (callNumber != null ? callNumber.hashCode() : 0);
+        result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
+        result = 31 * result + (year != null ? year.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        return result;
+    }
 }

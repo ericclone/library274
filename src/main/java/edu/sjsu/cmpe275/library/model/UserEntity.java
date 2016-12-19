@@ -20,6 +20,9 @@ public class UserEntity {
     private String verificationToken;
     private boolean enabled = false;
     private Collection<BlogEntity> blogsById;
+    private Collection<BookEntity> booksCreated;
+    private Collection<BookEntity> booksUpdated;
+    private Collection<CheckOutEntity> checkOut;
 
 
 
@@ -124,6 +127,42 @@ public class UserEntity {
         return enabled;
     }
 
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<BlogEntity> getBlogsById() {
+        return blogsById;
+    }
+
+    public void setBlogsById(Collection<BlogEntity> blogsById) {
+        this.blogsById = blogsById;
+    }
+
+    @OneToMany(mappedBy = "createdBy", fetch = FetchType.EAGER)
+    public Collection<BookEntity> getBooksCreated() {
+        return booksCreated;
+    }
+
+    public void setBooksCreated(Collection<BookEntity> booksCreated) {
+        this.booksCreated = booksCreated;
+    }
+
+    @OneToMany(mappedBy = "updatedBy", fetch = FetchType.EAGER)
+    public Collection<BookEntity> getBooksUpdated() {
+        return booksUpdated;
+    }
+
+    public void setBooksUpdated(Collection<BookEntity> booksUpdated) {
+        this.booksUpdated = booksUpdated;
+    }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    public Collection<CheckOutEntity> getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(Collection<CheckOutEntity> checkOut) {
+        this.checkOut = checkOut;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -140,7 +179,6 @@ public class UserEntity {
         return true;
     }
 
-
     @Override
     public int hashCode() {
         int result = id;
@@ -150,14 +188,5 @@ public class UserEntity {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<BlogEntity> getBlogsById() {
-        return blogsById;
-    }
-
-    public void setBlogsById(Collection<BlogEntity> blogsById) {
-        this.blogsById = blogsById;
     }
 }

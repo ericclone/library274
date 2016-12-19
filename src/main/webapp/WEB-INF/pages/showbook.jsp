@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +11,7 @@
 </head>
 <body>
 
-<h2>Book Information</h2>
+<h1>Book Details</h1>
    <table>
     <tr>
         <td>Book ID</td>
@@ -55,10 +57,16 @@
         <td>Keywords</td>
         <td>${book.keywords}</td>
     </tr>
+    <c:if test="${not empty book.coverUrl}">
     <tr>
-        <td>Cover Image URL</td>
-        <td>${book.coverUrl}</td>
+       <td colspan="2"><img src="${book.coverUrl}" width="200"></td>
     </tr>
-</table>  
+    </c:if>
+   </table>
+
+<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+    <a href="/update/${book.id}" type="button">Update</a>
+    <a href="/delete/${book.id}" type="button" onclick="return confirm('Deleting a book cannot be undone. Are you sure?')">Delete</a>
+</sec:authorize>
 </body>
 </html>

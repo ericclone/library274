@@ -15,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.jws.WebResult;
+import java.security.Principal;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -99,15 +100,12 @@ public class LoginController {
             return "usernotfound";
         }
         user.setEnabled(true);
-        System.out.println("writing " + user.isEnabled());
         UserEntity newUser = userRepository.saveAndFlush(user);
         if (newUser != null) {
-            System.out.println(newUser.isEnabled());
             return "verified";
         }
         return "usernotfound";
     }
-
 
 
     private boolean hasSjsuEmail(UserEntity u) {

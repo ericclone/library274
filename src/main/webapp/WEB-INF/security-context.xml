@@ -8,9 +8,10 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/library" />
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/library" />-->
+        <property name="url" value="jdbc:mysql://aacx75ifadh50i.c0hrznkaxb2t.us-west-1.rds.amazonaws.com:3306/library" />
         <property name="username" value="root" />
-        <property name="password" value="123456" />
+        <property name="password" value="12345678" />
     </bean>
 
     <security:authentication-manager>
@@ -33,8 +34,8 @@
         <security:intercept-url pattern="/logout" access="permitAll" />
         <security:intercept-url pattern="/loggedout" access="permitAll" />
         <security:intercept-url pattern="/admin" access="permitAll" />
-        <security:intercept-url pattern="/showbook" access="permitAll" />
-        <security:intercept-url pattern="/showbook/**" access="permitAll" />
+        <security:intercept-url pattern="/show" access="permitAll" />
+        <security:intercept-url pattern="/show/**" access="permitAll" />
         <security:intercept-url pattern="/confirm" access="permitAll" />
         <security:intercept-url pattern="/usernotfound" access="permitAll" />
         <security:intercept-url pattern="/verified" access="permitAll" />
@@ -43,9 +44,16 @@
         <security:intercept-url pattern="/createoffer" access="isAuthenticated()" />
         <security:intercept-url pattern="/docreate" access="isAuthenticated()" />
         <security:intercept-url pattern="/offercreated" access="isAuthenticated()" />
+        <security:intercept-url pattern="/list" access="isAuthenticated()" />
+        <security:intercept-url pattern="/checkout/**" access="isAuthenticated()" />
+        <security:intercept-url pattern="/return/**" access="isAuthenticated()" />
+        <security:intercept-url pattern="/checkouts" access="isAuthenticated()" />
 
         <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <security:intercept-url pattern="/createbook" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/update/**" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/delete/**" access="hasRole('ROLE_ADMIN')" />
+
         <security:intercept-url pattern="/**" access="denyAll" />
         <security:form-login login-page="/login"
                              authentication-failure-url="/login?error=true" />
