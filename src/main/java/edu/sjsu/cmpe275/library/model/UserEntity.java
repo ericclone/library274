@@ -19,7 +19,6 @@ public class UserEntity {
     private String authority;
     private String verificationToken;
     private boolean enabled = false;
-    private Collection<BlogEntity> blogsById;
     private Collection<BookEntity> booksCreated;
     private Collection<BookEntity> booksUpdated;
     private Collection<CheckOutEntity> checkOut;
@@ -125,15 +124,6 @@ public class UserEntity {
 
     public boolean isEnabled() {
         return enabled;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<BlogEntity> getBlogsById() {
-        return blogsById;
-    }
-
-    public void setBlogsById(Collection<BlogEntity> blogsById) {
-        this.blogsById = blogsById;
     }
 
     @OneToMany(mappedBy = "createdBy", fetch = FetchType.EAGER)

@@ -27,6 +27,11 @@ public class LoginController {
     @Autowired
     ApplicationEventPublisher eventPublisher;
 
+    @RequestMapping(value = "/")
+    public String getIndex() {
+        return "index";
+    }
+
     @RequestMapping(value = "/login")
     public String showLogin() {
         return "login";
