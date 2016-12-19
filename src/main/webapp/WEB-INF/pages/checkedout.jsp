@@ -12,6 +12,7 @@
     <title>Checkout Result</title>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <c:if test="${not empty success}">
     <h1>Successfully checked out ${book.title}</h1>
 </c:if>

@@ -8,7 +8,9 @@ import edu.sjsu.cmpe275.library.repository.BookRepository;
 import edu.sjsu.cmpe275.library.repository.CheckOutRepository;
 import edu.sjsu.cmpe275.library.repository.UserRepository;
 import edu.sjsu.cmpe275.library.util.Util;
+import org.apache.commons.io.IOUtils;
 import org.hibernate.annotations.Check;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
+import java.net.URL;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,14 +43,42 @@ public class BookController {
 
     @RequestMapping(value = "/createbook", method = RequestMethod.POST)
     public String createBook(@ModelAttribute BookEntity book, ModelMap modelMap, Principal principal) {
-        System.out.println(principal.getName());
+        BookEntity existingBook = bookRepository.findByIsbn(book.getIsbn());
+        if (existingBook != null) {
+            return "redirect:/show/" + existingBook.getId();
+        }
+        String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + book.getIsbn().replace("-", "");
+        String result = null;
+        InputStream in = null;
+        try {
+            in = new URL(url).openStream();
+            result = IOUtils.toString(in);
+        } catch (Exception e) {
+
+        } finally {
+            if (in != null) {
+                IOUtils.closeQuietly(in);
+            }
+        }
+        JSONObject jsonObject = null;
+        if (result != null) {
+            jsonObject = new JSONObject(result);
+        }
+        if (jsonObject != null && jsonObject.getInt("totalItems") == 1) {
+            JSONObject jsonBook = jsonObject.getJSONArray("items").getJSONObject(0).getJSONObject("volumeInfo");
+            book.setAuthor(Util.jsonArrayToString(jsonBook.getJSONArray("authors")));
+            book.setTitle(jsonBook.getString("title"));
+            book.setPublisher(jsonBook.getString("publisher"));
+            book.setYear(jsonBook.getString("publishedDate"));
+            book.setCoverUrl(jsonBook.getJSONObject("imageLinks").getString("thumbnail"));
+        }
+//        System.out.println(book);
+//        System.out.println(jsonObject);
+//        System.out.println(principal.getName());
         UserEntity currentUser = userRepository.findByEmail(principal.getName());
         book.setCreatedBy(currentUser);
         book.setUpdatedBy(currentUser);
         bookRepository.saveAndFlush(book);
-//        currentUser.getBooksCreated().add(book);
-//        currentUser.getBooksUpdated().add(book);
-//        userRepository.saveAndFlush(currentUser);
         modelMap.addAttribute("book", book);
         return "redirect:/show/" + book.getId();
     }

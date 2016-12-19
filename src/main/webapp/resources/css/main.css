@@ -45,3 +45,18 @@ table.offers {
     padding: 10px;
     border: 1px solid grey;
 }
+
+.red {
+    color: red;
+}
+
+table {
+    padding: 10px;
+    border: 1px solid grey;
+}
+table th {
+    boder: 1px solid grey;
+}
+table td {
+    border: 1px solid grey;
+}

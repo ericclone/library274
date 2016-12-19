@@ -20,6 +20,7 @@
           type='text/css' />
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <h1>My books</h1>
 <c:if test="${empty checkoutlist}">
     <div>

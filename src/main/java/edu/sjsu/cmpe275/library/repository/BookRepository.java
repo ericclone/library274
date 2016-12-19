@@ -16,6 +16,7 @@ import java.util.Date;
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
     BookEntity findById(Long id);
+    BookEntity findByIsbn(String isbn);
 
     @Modifying
     @Transactional

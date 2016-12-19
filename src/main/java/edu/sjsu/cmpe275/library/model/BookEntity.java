@@ -171,4 +171,25 @@ public class BookEntity {
         result = 31 * result + (location != null ? location.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "BookEntity{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", callNumber='" + callNumber + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", year='" + year + '\'' +
+                ", location='" + location + '\'' +
+                ", numberOfCopies='" + numberOfCopies + '\'' +
+                ", status='" + status + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", createdBy=" + createdBy +
+                ", updatedBy=" + updatedBy +
+                ", checkOut=" + checkOut +
+                '}';
+    }
 }

@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.library.util;
 
+import org.json.JSONArray;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,5 +28,15 @@ public class Util {
         c.setTime(currentDate);
         c.add(Calendar.DATE, daysAhead + days);
         return c.getTime();
+    }
+    public static String jsonArrayToString(JSONArray jsonArray) {
+        int arraySize = jsonArray.length();
+        String[] stringArray = new String[arraySize];
+
+        for(int i=0; i<arraySize; i++) {
+            stringArray[i] = (String) jsonArray.get(i);
+        }
+
+        return String.join(", ", stringArray);
     }
 }

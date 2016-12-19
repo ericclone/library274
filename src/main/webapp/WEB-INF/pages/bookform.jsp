@@ -7,6 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel='stylesheet'
+          href='${pageContext.request.contextPath}/static/css/main.css'
+          type='text/css' />
 <c:choose>
     <c:when test="${empty command.id}">
         <title>Create book</title>
@@ -25,10 +28,11 @@
         <h1>Update book</h1>
     </c:otherwise>
 </c:choose>
+<p>Note: Author, title, publisher, year, coverURL will be replaced if ISBN is valid</p>
 <form:form method="POST">
    <table>
     <tr>
-        <td><form:label path="isbn">ISBN</form:label></td>
+        <td><form:label path="isbn" class = "red">ISBN (Required)</form:label></td>
         <td><form:input path="isbn" /></td>
     </tr>
     <tr>
@@ -40,7 +44,7 @@
         <td><form:input path="title" /></td>
     </tr>
     <tr>
-        <td><form:label path="callNumber">Call Number</form:label></td>
+        <td><form:label path="callNumber" class = "red">Call Number (Required)</form:label></td>
         <td><form:input path="callNumber" /></td>
     </tr>
 
@@ -53,19 +57,19 @@
         <td><form:input path="year" /></td>
     </tr>
     <tr>
-        <td><form:label path="location">Location in Library</form:label></td>
+        <td><form:label path="location" class = "red">Location in Library (Required)</form:label></td>
         <td><form:input path="location" /></td>
     </tr>
     <tr>
-        <td><form:label path="numberOfCopies">Number of Copies</form:label></td>
+        <td><form:label path="numberOfCopies" class = "red">Number of Copies (Required)</form:label></td>
         <td><form:input path="numberOfCopies" /></td>
     </tr>
     <tr>
-        <td><form:label path="status">Current Status</form:label></td>
+        <td><form:label path="status" class = "red">Current Status (Required)</form:label></td>
         <td><form:input path="status" /></td>
     </tr>
     <tr>
-        <td><form:label path="keywords">Keywords</form:label></td>
+        <td><form:label path="keywords" class = "red">Keywords (Required)</form:label></td>
         <td><form:input path="keywords" /></td>
     </tr>
     <tr>

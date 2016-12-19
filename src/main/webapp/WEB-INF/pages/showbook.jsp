@@ -10,7 +10,7 @@
 <title>Book Details</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp"/>
 <h1>Book Details</h1>
    <table>
     <tr>
